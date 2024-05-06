@@ -83,6 +83,54 @@ src/app/modules/post/post.component.html:
  <p *ngIf="entity.body">{{entity.body}}s</p>
  ```
 
+## @Input and @Output
+@Input 用于从父组件向子组件传递数据，让父组件能够把数据绑定到子组件的属性上。
+@Output 用于从子组件向父组件传递数据，让子组件能够触发事件并向父组件传递数据。
+
+子组件： 
+可以通过outputEvent.emit() 触发事件像父组件传递数据
+```ts
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+
+@Component({
+  selector: 'child-component',
+  template: `
+    <p> {{inputValue}} </p>
+    <button (click)="onButtonClick()">Click me!</button>
+  `
+})
+export class ChildComponent {
+  @Input() inputValue: string;
+  @Output() outputEvent: EventEmitter<string> = new EventEmitter();
+
+  onButtonClick() {
+    this.outputEvent.emit('Data from child component');
+  }
+}
+
+```
+父组件：
+通过inputValue的将parentValue的数据传递给子组件。
+
+```ts
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'parent-component',
+  template: `
+    <child-component [inputValue]="parentValue" (outputEvent)="handleOutputEvent($event)"></child-component>
+  `
+})
+export class ParentComponent {
+  parentValue = 'Data from parent component';
+
+  handleOutputEvent(data: string) {
+    console.log('Received data in parent component:', data);
+  }
+}
+
+```
+
 # HTML
 ## 属性绑定：
 src/app/modules/post/post.component.html:
@@ -92,3 +140,6 @@ title="{{entity.title}}
 
 <h4><a [title]="entity.title" [textContent]="entity.title"></a></h4>
 [textContent]="entity.title" 等价为在标签中直接写值： {{entity.title}}
+
+# Directive 指令
+

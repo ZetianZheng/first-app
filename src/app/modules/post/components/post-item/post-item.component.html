@@ -1,0 +1,10 @@
+<li>
+    <h4>
+        <a [title]="entity.title" [textContent]="entity.title"></a>
+    </h4>
+    <p *ngIf="entity.body">{{entity.body}}</p>
+    <p>
+        <!-- 点击后会触发onClick事件，并且把entity数据传递出去 -->
+        <button (click)="onClick(entity)">Remove</button>
+    </p>
+</li>

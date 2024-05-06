@@ -1,11 +1,11 @@
-<p>post works!</p>
 <h3>{{title}}</h3>
 <ul>
-    <li *ngFor="let entity of entities; index as i">
-        <h4><a [title]="entity.title" [textContent]="entity.title"></a></h4>
-        <p *ngIf="entity.body">{{entity.body}}s</p>
-        <p>
-            <button (click)="removeItem(i)">Remove</button>
-        </p>
-    </li>
+   <!-- 每次将input的entity中的值绑定当前循环的值 -->
+   <!-- remove是事件监听器，监听DOM上名为remove的事件。 -->
+   <!-- $event 传递事件变量给removeItem方法，此处是entity -->
+   <app-post-item
+      *ngFor="let entity of entities"
+      [entity]="entity"
+      (remove)="removeItem($event)"
+   ></app-post-item>
 </ul>
