@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Post } from './models/post.model';
+import { posts } from './posts';
 
 @Component({
   selector: 'app-post',
@@ -9,12 +10,11 @@ import { Post } from './models/post.model';
 export class PostComponent {
   title = 'Posts';
 
-  entities = [
-    { id: 1, title: 'Hello', body: 'Hello my friend' },
-    { id: 2, title: 'Hola', body: 'Hola my friend' },
-    { id: 3, title: '你好', body: '你好 my friend' },
-  ];
-  constructor() {}
+  entities: Post[];
+
+  constructor() {
+    this.entities = posts;
+  }
 
   ngOninit() {}
 
@@ -31,7 +31,7 @@ export class PostComponent {
 
     // 更改item为post类型之后
     // 比较entity的id和当期
-     this.entities = this.entities.filter((entity) => {
+    this.entities = this.entities.filter((entity) => {
       return entity.id !== item.id;
     });
   }

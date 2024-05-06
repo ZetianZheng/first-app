@@ -1,6 +1,12 @@
 <li>
     <h4>
-        <a [title]="entity.title" [textContent]="entity.title"></a>
+        <!-- routerLink 是属于routermodule模块的，能让该链接绑定 /posts 接上id的链接 -->
+        <!-- 在 app.module.ts 中导入模块 -->
+        <a 
+        [routerLink] = "['/posts', entity.id]" 
+        [title]="entity.title" 
+        [textContent]="entity.title"
+        ></a>
     </h4>
     <p *ngIf="entity.body">{{entity.body}}</p>
     <p>

@@ -142,4 +142,45 @@ title="{{entity.title}}
 [textContent]="entity.title" 等价为在标签中直接写值： {{entity.title}}
 
 # Directive 指令
+ng-xxxx, 最常用做html标签
 
+# Router
+AppRoutingModule 定义路由，  
+在src/app/app-routing.module.ts 中可以增加路由定义：
+```ts
+const routes: Routes = [{ path: 'posts', component: PostComponent }];
+```
+
+在src/app/app.component.html中将 
+```html
+<app-post></app-post>
+```
+替换成
+```html
+<router-outlet></router-outlet>
+```
+从而输出路由定义的组件内容。
+http://localhost:4200/ 
+除了标题就不会有组件的内容；
+
+但是如果访问： http://localhost:4200/posts
+即可看到标题 + 定义的路由组件：post component
+
+## 给访问列表详情页 http://localhost:4200/posts/1
+生成新的component： ng generate component modules/post/components/post-details
+在src/app/app-routing.module.ts 添加新的路由： { path: 'posts/:id', component: PostDetailsComponent }];
+
+在src/app/modules/post/components/post-item/post-item.component.html 中添加，[routerLink] = "['/posts', entity.id]"  后，所有的列表title都带上超链接，可以重定向到相关的页面上
+
+### 超链传值： 那么超链之后，如何获得对应数据的值？
+比如说，去第一个超链获得所有Hello相关的信息？
+1. 导入ActivatedRoute
+2. 使用
+ ```ts
+  // 路由参数订阅方法
+    // 订阅路由参数发生变化的方法，当路由参数变化的时候，这个箭头函数会被调用，
+    // 并且会接收到一个参数params，包含路由参数信息的对象
+    this.route.paramMap.subscribe((params) => {
+```
+
+# 服务
