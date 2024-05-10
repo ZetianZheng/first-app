@@ -1,4 +1,9 @@
 # About the Module:
+通过 
+```
+ng generate module modules/post
+```
+来创建这个module
 ## About the declarations in NgModules:
 1. 问题： Angular modules 中，declaration 是什么？请举例说明。  
     回答： declarations 是 NgModule 的一个属性，用于声明当前模块中的组件、指令和管道。通过在 declarations 数组中列出这些项目，可以使它们在当前模块中可用。
@@ -183,4 +188,10 @@ http://localhost:4200/
     this.route.paramMap.subscribe((params) => {
 ```
 
-# 服务
+# 服务Service
+ng generate service modules/post/services/post
+1. 定义服务： src/app/modules/post/services/post.service.ts
+2. 注入服务：
+   1. constructor注入: constructor(private postService: PostService) {
+3. 使用服务：
+   1.  将 this.entities = posts; 改造成通过服务获取posts: this.entities = postService.index();

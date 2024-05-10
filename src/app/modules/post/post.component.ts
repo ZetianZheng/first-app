@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Post } from './models/post.model';
-import { posts } from './posts';
+import { PostService } from './services/post.service';
 
 @Component({
   selector: 'app-post',
@@ -12,8 +12,8 @@ export class PostComponent {
 
   entities: Post[];
 
-  constructor() {
-    this.entities = posts;
+  constructor(private postService: PostService) {
+    this.entities = postService.index();
   }
 
   ngOninit() {}
