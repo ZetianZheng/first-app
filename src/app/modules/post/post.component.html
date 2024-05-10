@@ -1,0 +1,11 @@
+<h3>{{title}}</h3>
+<ul>
+   <!-- 每次将input的entity中的值绑定当前循环的值 -->
+   <!-- remove是事件监听器，监听DOM上名为remove的事件。 -->
+   <!-- $event 传递事件变量给removeItem方法，此处是entity -->
+   <app-post-item
+      *ngFor="let entity of entities"
+      [entity]="entity"
+      (remove)="removeItem($event)"
+   ></app-post-item>
+</ul>

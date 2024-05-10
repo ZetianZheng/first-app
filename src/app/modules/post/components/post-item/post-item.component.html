@@ -1,0 +1,16 @@
+<li>
+    <h4>
+        <!-- routerLink 是属于routermodule模块的，能让该链接绑定 /posts 接上id的链接 -->
+        <!-- 在 app.module.ts 中导入模块 -->
+        <a 
+        [routerLink] = "['/posts', entity.id]" 
+        [title]="entity.title" 
+        [textContent]="entity.title"
+        ></a>
+    </h4>
+    <p *ngIf="entity.body">{{entity.body}}</p>
+    <p>
+        <!-- 点击后会触发onClick事件，并且把entity数据传递出去 -->
+        <button (click)="onClick(entity)">Remove</button>
+    </p>
+</li>
